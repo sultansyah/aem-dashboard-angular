@@ -1,5 +1,113 @@
-.bg-gray-custom
-    background: rgba(234, 239, 239, 0.85)
+.container-custom
+    display: flex
+    justify-content: center
+    align-items: center
+    min-height: 100vh
 
-.box
+.header-custom
+    background: rgba(234, 239, 239, 0.85)
+    padding-inline: 100px
+    padding-block: 10px
+    text-align: center
+
+.card-custom
     border: 1.5px solid #bdbdbd
+    border-radius: 12px
+    width: 500px
+    max-width: 100%
+
+.card-body-custom
+    padding-inline: 25px
+    padding-block: 45px
+
+.form-input-custom
+    width: 100%
+    padding: 12px
+    margin: 8px 0
+    display: inline-block
+    border: 1px solid #ccc
+    border-radius: 4px
+    box-sizing: border-box
+
+.password-container
+    position: relative
+    width: 100%
+    max-width: 100vh
+
+.password-container input
+    width: 100%
+    padding: 10px 40px 10px 10px
+    box-sizing: border-box
+
+#togglePassword
+    position: absolute
+    top: 50%
+    right: 12px
+    transform: translateY(-50%)
+    cursor: pointer
+    color: #777
+
+.btn-custom
+    background-color: rgb(2, 117, 216)
+    color: white
+    font-weight: 700
+    text-transform: uppercase
+    font-size: 16px
+    letter-spacing: 1px
+    padding: 13px 32px
+    border: none
+    border-radius: 7px
+    cursor: pointer
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15)
+    transition: 0.2s ease-in-out
+    margin-top: 8px
+
+.btn-disabled
+    background-color: rgb(94, 142, 184)
+    color: white
+    font-weight: 700
+    text-transform: uppercase
+    font-size: 16px
+    letter-spacing: 1px
+    padding: 13px 32px
+    border: none
+    border-radius: 7px
+    cursor: pointer
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15)
+    transition: 0.2s ease-in-out
+    margin-top: 8px
+
+.btn-custom:hover
+    background-color: rgb(1, 105, 195)
+
+.alert-warning-custom
+    font-size: 14px
+    padding: 10px
+    margin-bottom: 14px
+    color: #664d03
+    background-color: #fff3cd
+    border: 1px solid #ffecb5
+    border-radius: 4px
+
+.alert-danger-custom
+    font-size: 14px
+    padding: 10px
+    margin-bottom: 14px
+    color: #721c24
+    background-color: #f8d7da
+    border-color: #f5c6cb
+    border-radius: 4px
+
+.spinner-border-custom
+    display: inline-block
+    width: 2rem
+    height: 2rem
+    vertical-align: text-bottom
+    border: .25em solid currentColor
+    border-right-color: transparent
+    border-radius: 50%
+    animation: spinner-border-custom .75s linear infinite
+
+@keyframes spinner-border-custom
+    to
+        transform: rotate(360deg)
