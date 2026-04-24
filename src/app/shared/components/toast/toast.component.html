@@ -1,0 +1,9 @@
+<div class="toast-wrapper">
+    <div class="toast-box" *ngFor="let toast of toasts$ | async; trackBy: trackById" [ngClass]="toast.type"
+        @toastAnimation>
+        {{ toast.message }}
+        <button type="button" class="close-btn" (click)="remove(toast.id)">
+            &times;
+        </button>
+    </div>
+</div>
