@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  authService = inject(AuthService);
-
   loginForm!: FormGroup;
   showPassword = false;
   isLoading = false;
@@ -19,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
     
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+      this.isLoading = false;
       return;
     }
 
@@ -64,7 +66,10 @@ export class LoginComponent implements OnInit {
           finalize(() => this.isLoading = false)
         )
         .subscribe({
-          next: _ => this.router.navigate(['/dashboard']),
+          next: _ => {
+            this.toastService.success('Login successful. Redirecting to dashboard...');
+            this.router.navigate(['/dashboard']);
+          },
           error: err => this.errorMessage = err
         })
   }
