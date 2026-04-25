@@ -16,7 +16,7 @@ interface PublicEndpoint {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private readonly apiOrigin = new URL(environment.apiUrl).origin;
+  private readonly apiOrigin = new URL(environment.apiUrl, window.location.origin).origin;
 
   private readonly publicEndpoints: PublicEndpoint[] = [
     { method: 'POST', path: '/api/account/login' }
