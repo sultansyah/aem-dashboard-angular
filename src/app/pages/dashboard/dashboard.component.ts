@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { DashboardResponse } from 'src/app/models/dashboard-response.model';
+import { DashboardResponse, UserItem } from 'src/app/models/dashboard-response.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
@@ -11,7 +11,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent implements OnInit {
-  dashboardData: DashboardResponse | null = null
+  dashboardData: DashboardResponse | null = null;
   isLoading = false;
   errorMessage: string | null = null;
 
@@ -22,9 +22,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadDashboard();
   }
 
-  loadDashboard() {
+  loadDashboard(): void {
     this.isLoading = true
 
     this.dashboardService
@@ -41,5 +42,9 @@ export class DashboardComponent implements OnInit {
           }
         }
       })
+  }
+
+  trackByUsername(index: number, item: UserItem): string {
+    return item.username
   }
 }
