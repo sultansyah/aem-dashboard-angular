@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular
-        run: npm run build
+        run: npm run build -- --configuration production
 
       - name: Clean server target
         uses: appleboy/ssh-action@v1.0.3
