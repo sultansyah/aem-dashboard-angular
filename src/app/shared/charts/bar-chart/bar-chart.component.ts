@@ -1,5 +1,8 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
-import * as d3 from 'd3';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { max } from 'd3-array';
+import { scaleBand, scaleLinear } from 'd3-scale';
+import { Selection, select } from 'd3-selection';
 import { ChartItem } from 'src/app/models/dashboard-response.model';
 
 @Component({
@@ -7,15 +10,15 @@ import { ChartItem } from 'src/app/models/dashboard-response.model';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.sass']
 })
-export class BarChartComponent {
+export class BarChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('chartContainer', { static: true })
-  chartContainer!: ElementRef;
+  chartContainer!: ElementRef<HTMLDivElement>;
 
   @Input() data: ChartItem[] = [];
   @Input() xLabel = 'Category';
   @Input() yLabel = 'Value';
 
-  private svg: any;
+  private svg: Selection<SVGSVGElement, unknown, null, undefined> | null = null;
   private width = 500;
   private height = 300;
 
@@ -37,17 +40,24 @@ export class BarChartComponent {
     this.updateChart();
   }
 
+  ngOnDestroy(): void {
+    this.svg?.remove();
+    this.svg = null;
+  }
+
   private createChart(): void {
     this.width = this.chartContainer.nativeElement.offsetWidth;
     this.height = Math.min(this.width, 350);
 
-    this.svg = d3.select(this.chartContainer.nativeElement)
+    this.svg = select(this.chartContainer.nativeElement)
       .append('svg')
       .attr('width', '100%')
       .attr('height', this.height);
   }
 
   private updateChart(): void {
+    if (!this.svg) return;
+
     this.svg.selectAll('*').remove();
 
     this.svg
@@ -61,13 +71,13 @@ export class BarChartComponent {
     const g = this.svg.append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const x = d3.scaleBand()
+    const x = scaleBand()
       .domain(this.data.map(d => d.name))
       .range([0, width])
       .padding(0.2);
 
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(this.data, d => d.value) || 100])
+    const y = scaleLinear()
+      .domain([0, max(this.data, d => d.value) || 100])
       .nice()
       .range([height, 0]);
 
@@ -97,11 +107,11 @@ export class BarChartComponent {
     // x axis
     g.append('g')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x));
+      .call(axisBottom(x));
 
     // y axis
     g.append('g')
-      .call(d3.axisLeft(y));
+      .call(axisLeft(y));
 
     // x label
     g.append('text')
