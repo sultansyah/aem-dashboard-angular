@@ -112,6 +112,7 @@ export class DonutChartComponent implements AfterViewInit, OnChanges, OnDestroy 
       .attr('x', 0)
       .attr('y', '-0.2em')
       .style('font-weight', 'bold')
+      .style('fill', 'white')
       .text((d: PieArcDatum<ChartItem>) => d.data.name);
 
     // value only if slice is large enough
@@ -124,6 +125,8 @@ export class DonutChartComponent implements AfterViewInit, OnChanges, OnDestroy 
       .attr('x', 0)
       .attr('y', '1em')
       .style('fill-opacity', '0.75')
+      .style('fill', 'white')
+      .style('font-weight', 'bold')
       .text((d: PieArcDatum<ChartItem>) => d.data.value);
 
     // center text
