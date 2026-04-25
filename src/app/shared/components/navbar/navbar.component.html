@@ -1,12 +1,8 @@
-<nav class="navbar navbar-custom px-5">
-    <span class="navbar-brand text-custom">Dashboard</span>
+<nav class="navbar navbar-custom px-4">
+    <span class="navbar-brand text-custom mb-0">Dashboard</span>
 
-    <button type="button" class="btn btn-logout" (click)="logout()">
-        <svg xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16">
+    <button type="button" class="btn btn-logout" (click)="openModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 
             <path fill-rule="evenodd"
                 d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
@@ -17,4 +13,15 @@
 
         <span class="ml-1">Sign Out</span>
     </button>
+
 </nav>
+
+<app-modal
+    title="Logout"
+    confirmText="Sign Out"
+    cancelText="Cancel"
+    [isOpen]="isModalOpen"
+    (closed)="closeModal()"
+    (confirmed)="logout()">
+    Are you sure you want to sign out?
+</app-modal>

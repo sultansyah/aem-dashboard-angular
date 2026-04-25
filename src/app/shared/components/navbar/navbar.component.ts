@@ -9,6 +9,8 @@ import { ToastService } from 'src/app/core/services/toast.service';
   styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent {
+  isModalOpen = false;
+  
   constructor(
     private authService: AuthService,
     private toastService: ToastService,
@@ -19,5 +21,13 @@ export class NavbarComponent {
     this.authService.logout();
     this.toastService.success('Logout successful. Redirecting to login...');
     this.router.navigate(['/login']);
+  }
+
+  openModal(): void {
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 }

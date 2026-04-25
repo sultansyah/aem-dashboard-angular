@@ -6,13 +6,15 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { DonutChartComponent } from './charts/donut-chart/donut-chart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     BarChartComponent,
     DonutChartComponent,
     NavbarComponent,
-    ToastComponent
+    ToastComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { ToastComponent } from './components/toast/toast.component';
     BarChartComponent,
     DonutChartComponent,
     NavbarComponent,
+    ModalComponent,
     ToastComponent
   ]
 })
