@@ -1,9 +1,7 @@
 <div class="">
     <h2 class="mb-4">Overview</h2>
 
-    <div *ngIf="isLoading" class="alert alert-info">
-        Loading dashboard data...
-    </div>
+    <app-dashboard-skeleton *ngIf="isLoading"></app-dashboard-skeleton>
 
     <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}

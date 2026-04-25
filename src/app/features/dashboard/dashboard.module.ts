@@ -7,13 +7,15 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { DashboardSkeletonComponent } from './components/dashboard-skeleton/dashboard-skeleton.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardLayoutComponent,
     DashboardChartsComponent,
-    UserListComponent
+    UserListComponent,
+    DashboardSkeletonComponent
   ],
   imports: [
     CommonModule,
