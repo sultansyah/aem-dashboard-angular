@@ -1,0 +1,24 @@
+<h2 class="mb-4">User List</h2>
+
+<table *ngIf="users.length" class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">User Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; index as i; trackBy: trackByUsername;">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.username }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="!users.length" class="alert alert-secondary">
+    No users found.
+</div>

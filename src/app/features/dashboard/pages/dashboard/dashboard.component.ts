@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { DashboardResponse, UserItem } from 'src/app/features/dashboard/models/dashboard-response.model';
+import { DashboardResponse } from 'src/app/features/dashboard/models/dashboard-response.model';
 import { DashboardService } from 'src/app/features/dashboard/services/dashboard.service';
 
 @Component({
@@ -48,9 +48,5 @@ export class DashboardComponent implements OnInit {
             : 'Something went wrong';
         }
       })
-  }
-
-  trackByUsername(index: number, item: UserItem): string {
-    return item.username
   }
 }
