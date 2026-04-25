@@ -72,8 +72,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/dashboard']);
           },
           error: err => {
-            console.error('[LoginComponent] Login subscription error', err);
-
             this.errorMessage = err instanceof Error
               ? err.message
               : 'Something went wrong';

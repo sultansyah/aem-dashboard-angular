@@ -19,11 +19,6 @@ export class AuthService {
 
   login(data: LoginRequest): Observable<string> {
     const fullUrl = `${this.apiUrl}/account/login`;
-    console.info('[AuthService] Login request', {
-      url: fullUrl,
-      username: data.username
-    });
-
     return this.http.post<string>(fullUrl, data).pipe(
       map(res => {
         if (!res) throw new Error('Invalid username or password');
@@ -37,14 +32,6 @@ export class AuthService {
   }
 
   private handleLoginError(error: HttpErrorResponse): Observable<never> {
-    console.error('[AuthService] Login failed', {
-      status: error.status,
-      statusText: error.statusText,
-      url: error.url,
-      message: error.message,
-      error: error.error
-    });
-
     if (error.status === 401) {
       return throwError(() => new Error('Invalid username or password'));
     }
