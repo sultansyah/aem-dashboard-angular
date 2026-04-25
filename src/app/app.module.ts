@@ -14,6 +14,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { BarChartComponent } from './shared/charts/bar-chart/bar-chart.component';
+import { DonutChartComponent } from './shared/charts/donut-chart/donut-chart.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     DashboardComponent,
     DashboardLayoutComponent,
     NavbarComponent,
-    ToastComponent
+    ToastComponent,
+    BarChartComponent,
+    DonutChartComponent
   ],
   imports: [
     BrowserModule,
