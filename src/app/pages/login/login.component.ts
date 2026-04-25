@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
+    this.errorMessage = null;
     
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -70,7 +71,11 @@ export class LoginComponent implements OnInit {
             this.toastService.success('Login successful. Redirecting to dashboard...');
             this.router.navigate(['/dashboard']);
           },
-          error: err => this.errorMessage = err
+          error: err => {
+            this.errorMessage = err instanceof Error
+              ? err.message
+              : 'Something went wrong';
+          }
         })
   }
 

@@ -12,8 +12,9 @@
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div>
+                    <label for="username" class="sr-only">Username</label>
                     <input id="username" type="text" formControlName="username" class="form-input-custom"
-                        placeholder="Username">
+                        placeholder="Username" autocomplete="username">
 
                     <div *ngIf="username?.invalid && (username?.dirty || username?.touched)"
                         class="alert-warning-custom">
@@ -32,9 +33,12 @@
 
                 <div>
                     <div class="password-container">
+                        <label for="password" class="sr-only">Password</label>
                         <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                            class="form-input-custom" placeholder="Password" />
-                        <div id="togglePassword" (click)="togglePassword()">
+                            class="form-input-custom" placeholder="Password" autocomplete="current-password" />
+                        <button type="button" id="togglePassword" (click)="togglePassword()"
+                            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                            [attr.aria-pressed]="showPassword">
                             <!-- Eye Icon -->
                             <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                                 fill="currentColor" viewBox="0 0 16 16">
@@ -53,7 +57,7 @@
                                 <path
                                     d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z" />
                             </svg>
-                        </div>
+                        </button>
                     </div>
 
                     <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
