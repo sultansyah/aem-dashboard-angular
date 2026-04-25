@@ -3,7 +3,7 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { max } from 'd3-array';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { Selection, select } from 'd3-selection';
-import { ChartItem } from 'src/app/models/dashboard-response.model';
+import { ChartItem } from 'src/app/shared/models/chart.model';
 
 @Component({
   selector: 'app-bar-chart',

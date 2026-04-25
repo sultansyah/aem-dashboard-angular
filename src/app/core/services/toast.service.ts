@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastData } from '../models/toast.model';
+import { ToastData } from 'src/app/shared/models/toast.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

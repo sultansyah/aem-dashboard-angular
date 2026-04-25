@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ToastData } from 'src/app/models/toast.model';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { ToastData } from 'src/app/shared/models/toast.model';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({

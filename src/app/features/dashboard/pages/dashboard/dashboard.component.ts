@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { DashboardResponse, UserItem } from 'src/app/models/dashboard-response.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { DashboardResponse, UserItem } from 'src/app/features/dashboard/models/dashboard-response.model';
+import { DashboardService } from 'src/app/features/dashboard/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -4,7 +4,7 @@ import { scaleOrdinal } from 'd3-scale';
 import { Selection, select } from 'd3-selection';
 import { arc, pie, PieArcDatum } from 'd3-shape';
 import { schemeCategory10 } from 'd3-scale-chromatic';
-import { ChartItem } from 'src/app/models/dashboard-response.model';
+import { ChartItem } from 'src/app/shared/models/chart.model';
 
 @Component({
   selector: 'app-donut-chart',

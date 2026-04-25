@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { LoginRequest } from '../models/login-request.model';
+import { LoginRequest } from 'src/app/features/auth/models/login-request.model';
 import { TokenService } from './token.service';
 
 @Injectable({

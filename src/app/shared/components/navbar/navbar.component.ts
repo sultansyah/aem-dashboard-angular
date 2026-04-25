@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +16,8 @@ export class NavbarComponent {
   ) { }
 
   logout(): void {
-    this.toastService.success('Logout successful. Redirecting to login...');
     this.authService.logout();
+    this.toastService.success('Logout successful. Redirecting to login...');
     this.router.navigate(['/login']);
   }
 }

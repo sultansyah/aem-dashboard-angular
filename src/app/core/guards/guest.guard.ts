@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -11,10 +10,9 @@ export class GuestGuard implements CanActivate {
     private authService: AuthService,
     private router: Router
   ) { }
-  canActivate(): boolean {
+  canActivate(): boolean | UrlTree {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/dashboard']);
-      return false;
+      return this.router.createUrlTree(['/dashboard']);
     }
 
     return true;

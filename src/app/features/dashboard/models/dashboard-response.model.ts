@@ -1,5 +1,5 @@
-export { ChartItem } from './chart.model';
-import { ChartItem } from './chart.model';
+export { ChartItem } from 'src/app/shared/models/chart.model';
+import { ChartItem } from 'src/app/shared/models/chart.model';
 
 export interface DashboardResponse {
     success: boolean;
