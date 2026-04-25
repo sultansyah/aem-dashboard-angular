@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
   }
 
   loadDashboard(): void {
-    this.isLoading = true
+    this.isLoading = true;
+    this.errorMessage = null;
 
     this.dashboardService
       .getData()
@@ -39,7 +40,12 @@ export class DashboardComponent implements OnInit {
           if ((err as Error).message === "Unauthorized") {
             this.authService.logout();
             this.router.navigate(['/login']);
+            return;
           }
+
+          this.errorMessage = err instanceof Error
+            ? err.message
+            : 'Something went wrong';
         }
       })
   }

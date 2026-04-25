@@ -1,13 +1,21 @@
 <div class="">
     <h2 class="mb-4">Overview</h2>
 
-    <div class="row">
+    <div *ngIf="isLoading" class="alert alert-info">
+        Loading dashboard data...
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && dashboardData" class="row">
         <div class="col-12 col-md-6 mb-3">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Category Distribution</h5>
-                    <app-donut-chart *ngIf="dashboardData?.chartDonut"
-                        [data]="dashboardData?.chartDonut || []"></app-donut-chart>
+                    <app-donut-chart *ngIf="dashboardData.chartDonut"
+                        [data]="dashboardData.chartDonut"></app-donut-chart>
                 </div>
             </div>
         </div>
@@ -16,15 +24,15 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Value Comparison</h5>
-                    <app-bar-chart *ngIf="dashboardData?.chartBar" [data]="dashboardData?.chartBar || []" xLabel="Items"
+                    <app-bar-chart *ngIf="dashboardData.chartBar" [data]="dashboardData.chartBar" xLabel="Items"
                         yLabel="Amount"></app-bar-chart>
                 </div>
             </div>
         </div>
     </div>
 
-    <h2 class="mb-4">User List</h2>
-    <table class="table table-bordered">
+    <h2 *ngIf="!isLoading && !errorMessage && dashboardData" class="mb-4">User List</h2>
+    <table *ngIf="!isLoading && !errorMessage && dashboardData?.tableUsers?.length" class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -42,4 +50,8 @@
             </tr>
         </tbody>
     </table>
+
+    <div *ngIf="!isLoading && !errorMessage && dashboardData && !dashboardData.tableUsers.length" class="alert alert-secondary">
+        No users found.
+    </div>
 </div>
