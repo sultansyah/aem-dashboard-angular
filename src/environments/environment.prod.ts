@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   apiUrl: '/api',
-  enableLocalAuthFallback: false
+  enableLocalAuthFallback: false,
+  useHashRouting: false
 };

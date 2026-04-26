@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
@@ -24,7 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: environment.useHashRouting
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
