@@ -30,7 +30,13 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "pouchdb-browser",
+              "events",
+              "spark-md5",
+              "vuvuzela"
+            ]
           },
           "configurations": {
             "production": {
@@ -54,6 +60,27 @@
               ],
               "outputHashing": "all"
             },
+            "electron": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "600kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.electron.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -70,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "aem-dashboard-angular:build:production"
+            },
+            "electron": {
+              "browserTarget": "aem-dashboard-angular:build:electron"
             },
             "development": {
               "browserTarget": "aem-dashboard-angular:build:development"

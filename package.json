@@ -1,12 +1,28 @@
 {
   "name": "aem-dashboard-angular",
   "version": "0.0.0",
+  "main": "dist-electron/main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron:compile": "tsc -p electron/tsconfig.json",
+    "electron": "concurrently \"ng serve --configuration electron\" \"wait-on http://localhost:4200 && npm run electron:compile && electron .\"",
+    "electron:build": "ng build --configuration electron --base-href ./ && npm run electron:compile && electron-builder"
+  },
+  "build": {
+    "appId": "com.sultansyah.aemdashboard",
+    "productName": "AEM Dashboard",
+    "files": [
+      "dist/aem-dashboard-angular/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    }
   },
   "private": true,
   "dependencies": {
@@ -20,6 +36,7 @@
     "@angular/router": "^14.2.0",
     "bootstrap": "^4.6.2",
     "d3": "^7.8.5",
+    "pouchdb-browser": "^9.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -32,12 +49,17 @@
     "@types/d3-dispatch": "^3.0.6",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^16.18.68",
+    "@types/pouchdb-browser": "^6.1.5",
+    "concurrently": "^9.2.1",
+    "electron": "^41.3.0",
+    "electron-builder": "^26.8.1",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.7.2"
+    "typescript": "~4.7.2",
+    "wait-on": "^9.0.5"
   }
 }
