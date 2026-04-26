@@ -1,5 +1,11 @@
-<div class="">
-    <h2 class="mb-4">Overview</h2>
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Overview</h2>
+
+        <button class="btn btn-primary" (click)="loadDashboard()">
+            Refresh
+        </button>
+    </div>
 
     <app-dashboard-skeleton *ngIf="isLoading"></app-dashboard-skeleton>
 
@@ -8,9 +14,7 @@
     </div>
 
     <div *ngIf="!isLoading && !errorMessage && dashboardData">
-        <app-dashboard-charts
-            [chartDonut]="dashboardData.chartDonut"
-            [chartBar]="dashboardData.chartBar">
+        <app-dashboard-charts [chartDonut]="dashboardData.chartDonut" [chartBar]="dashboardData.chartBar">
         </app-dashboard-charts>
 
         <app-user-list [users]="dashboardData.tableUsers"></app-user-list>
