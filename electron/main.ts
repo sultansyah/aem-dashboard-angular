@@ -1,9 +1,14 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import { join } from 'path';
+import { pathToFileURL } from 'url';
 
 let mainWindow: BrowserWindow | null = null;
 
 function createWindow(): void {
+    if (app.isPackaged) {
+        Menu.setApplicationMenu(null);
+    }
+
     mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
@@ -16,10 +21,33 @@ function createWindow(): void {
         }
     });
 
-    if (!app.isPackaged) {
-        mainWindow.loadURL('http://localhost:4200');
+    if (app.isPackaged) {
+        const indexPath = join(__dirname, '../dist/aem-dashboard-angular/index.html');
+        const indexUrl = pathToFileURL(indexPath).toString();
+
+        mainWindow.loadURL(`${indexUrl}#/login`);
+
+        mainWindow.webContents.on('before-input-event', (event, input) => {
+            const key = input.key.toLowerCase();
+            const isReloadShortcut =
+                input.key === 'F5' ||
+                (key === 'r' && (input.control || input.meta));
+
+            const isDevToolsShortcut =
+                input.key === 'F12' ||
+                (key === 'i' && input.control && input.shift) ||
+                (key === 'i' && input.meta && input.alt);
+
+            if (isReloadShortcut || isDevToolsShortcut) {
+                event.preventDefault();
+            }
+        });
+
+        mainWindow.webContents.on('devtools-opened', () => {
+            mainWindow?.webContents.closeDevTools();
+        });
     } else {
-        mainWindow.loadFile(join(__dirname, '../dist/aem-dashboard-angular/index.html'));
+        mainWindow.loadURL('http://localhost:4200');
     }
 
     mainWindow.on('closed', () => {
