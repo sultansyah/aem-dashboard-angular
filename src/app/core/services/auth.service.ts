@@ -49,7 +49,7 @@ export class AuthService {
       }),
 
       catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 401 && this.enableLocalAuthFallback) {
+        if (this.enableLocalAuthFallback) {
           return this.loginWithLocalFallback(data);
         }
 
