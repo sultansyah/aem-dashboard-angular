@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { DashboardResponse } from 'src/app/features/dashboard/models/dashboard-response.model';
 import { DashboardService } from 'src/app/features/dashboard/services/dashboard.service';
 
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -32,13 +34,17 @@ export class DashboardComponent implements OnInit {
     this.dashboardService
       .getData()
       .pipe(
-        finalize(() => this.isLoading = false)
+        finalize(() => {
+          this.isLoading = false;
+          this.toastService.success('Dashboard data refreshed.');
+        })
       )
       .subscribe({
         next: value => this.dashboardData = value,
         error: err => {
-          if ((err as Error).message === "Unauthorized") {
+          if ((err as Error).message === 'Unauthorized') {
             this.authService.logout();
+            this.toastService.warning('Session expired. Please login again.');
             this.router.navigate(['/login']);
             return;
           }
@@ -46,6 +52,8 @@ export class DashboardComponent implements OnInit {
           this.errorMessage = err instanceof Error
             ? err.message
             : 'Something went wrong';
+
+          this.toastService.error(this.errorMessage);
         }
       })
   }
