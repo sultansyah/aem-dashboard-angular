@@ -1,31 +1,44 @@
-# AemDashboardAngular
+# AEM Dashboard Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+Angular 14 dashboard application with web and Electron desktop support.
 
 ## Live Demo
 
 https://sultansyah.web.id/
 
-## Development server
+## Web Development
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm install
+npm start
+```
 
-## Code scaffolding
+Open `http://localhost:4200/`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Web Build
 
-## Build
+```bash
+npm run build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The production web build uses /api and is intended to be served behind an HTTPS reverse proxy, because if we deploy it to a server with an HTTPS domain, it cannot fetch data from an API hosted on an HTTP domain.
 
-## Running unit tests
+## Electron Development
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm run electron
+```
 
-## Running end-to-end tests
+## Electron Build
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm run electron:build
+```
 
-## Further help
+Electron enables local authentication fallback through PouchDB. The app tries the login API first; when local fallback is enabled and API login is rejected, credentials are validated against the local PouchDB cache.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Tests
+
+```bash
+npm test
+```
