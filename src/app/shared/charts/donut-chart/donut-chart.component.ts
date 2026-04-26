@@ -124,7 +124,6 @@ export class DonutChartComponent implements AfterViewInit, OnChanges, OnDestroy 
       .append('tspan')
       .attr('x', 0)
       .attr('y', '1em')
-      .style('fill-opacity', '0.75')
       .style('fill', 'white')
       .style('font-weight', 'bold')
       .text((d: PieArcDatum<ChartItem>) => d.data.value);
