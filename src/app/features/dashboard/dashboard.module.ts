@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { DashboardSkeletonComponent } from './components/dashboard-skeleton/dashboard-skeleton.component';
+import { ClientPaginationComponent } from 'src/app/shared/components/client-pagination/client-pagination.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DashboardSkeletonComponent } from './components/dashboard-skeleton/dash
     DashboardLayoutComponent,
     DashboardChartsComponent,
     UserListComponent,
-    DashboardSkeletonComponent
+    DashboardSkeletonComponent,
+    ClientPaginationComponent
   ],
   imports: [
     CommonModule,
