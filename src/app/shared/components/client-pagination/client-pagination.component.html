@@ -1,0 +1,47 @@
+<nav aria-label="Page navigation User List">
+    <div class="row align-items-center">
+        <!-- page size -->
+        <div class="col-12 col-md-auto mb-2 mb-md-0">
+            <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                <small class="mr-2 text-muted">Rows per page:</small>
+
+                <select class="form-control form-control-sm w-auto" [value]="pageSize"
+                    (change)="changePageSize($event)">
+                    <option *ngFor="let size of pageSizeOptions" [value]="size">
+                        {{ size }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <!-- pagination -->
+        <div class="col-12 col-md">
+            <ul class="pagination justify-content-center justify-content-md-end mb-0 flex-wrap">
+                <!-- previous -->
+                <li class="page-item" [class.disabled]="!hasPreviousPage()">
+                    <button type="button" class="page-link" [disabled]="!hasPreviousPage()"
+                        (click)="changePage(currentPage - 1)">
+                        Previous
+                    </button>
+                </li>
+
+                <!-- page number -->
+                <li class="page-item" *ngFor="let page of totalPages" [class.active]="page === currentPage">
+                    <button type="button" class="page-link" (click)="changePage(page)">
+                        {{ page }}
+                    </button>
+                </li>
+
+                <!-- next -->
+                <li class="page-item" [class.disabled]="!hasNextPage()">
+                    <button type="button" class="page-link" [disabled]="!hasNextPage()"
+                        (click)="changePage(currentPage + 1)">
+                        Next
+                    </button>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
