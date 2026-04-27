@@ -1,18 +1,21 @@
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Overview</h2>
-
-        <div class="d-flex align-items-center">
-            <small *ngIf="dashboardData?.lastFetchedAt" class="text-muted mr-2">
-                Last fetched: {{ dashboardData?.lastFetchedAt | date:'medium' }}
-            </small>
-
-            <button [class]="isLoading ? 'btn btn-secondary' : 'btn btn-primary'" type="button" [disabled]="isLoading"
-                (click)="loadDashboard(true)">
-                Refresh
-            </button>
-        </div>
+<div>
+    <div class="d-flex flex-column flex-md-row align-items-start mb-4">
+    <h2 class="mb-3 mb-md-0">Overview</h2>
+    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center ml-md-auto">
+        <small
+            *ngIf="dashboardData?.lastFetchedAt"
+            class="text-muted mb-2 mb-sm-0 mr-sm-2">
+            Last fetched: {{ dashboardData?.lastFetchedAt | date:'medium' }}
+        </small>
+        <button
+            [class]="isLoading ? 'btn btn-secondary' : 'btn btn-primary'"
+            type="button"
+            [disabled]="isLoading"
+            (click)="loadDashboard(true)">
+            Refresh
+        </button>
     </div>
+</div>
 
     <app-dashboard-skeleton *ngIf="isLoading"></app-dashboard-skeleton>
 
