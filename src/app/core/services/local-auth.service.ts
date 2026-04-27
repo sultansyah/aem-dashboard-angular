@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LocalAuthRecord } from 'src/app/shared/models/local-auth.model';
 import { PouchDbService } from '../storage/pouch-db.service';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class LocalAuthService {
     const now = new Date().toISOString();
 
     try {
-      const existing = await this.pouchDbService.getById(recordId);
+      const existing = await this.pouchDbService.getById<LocalAuthRecord>(recordId);
 
       await this.pouchDbService.upsert({
         ...existing,
@@ -52,7 +53,7 @@ export class LocalAuthService {
     const passwordHash = await this.hashPassword(password);
 
     try {
-      const record = await this.pouchDbService.getById(recordId);
+      const record = await this.pouchDbService.getById<LocalAuthRecord>(recordId);
       if (record.passwordHash !== passwordHash) {
         throw new Error('INVALID_LOGIN');
       }

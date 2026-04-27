@@ -6,6 +6,8 @@ export interface DashboardResponse {
     chartDonut: ChartItem[];
     chartBar: ChartItem[];
     tableUsers: UserItem[];
+    isOfflineData?: boolean;
+    lastFetchedAt?: string;
 }
 
 export interface UserItem {

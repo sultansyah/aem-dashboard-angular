@@ -1,11 +1,6 @@
-export interface LocalAuthDatabase {
-    get(id: string): Promise<LocalAuthRecord>;
-    put(record: LocalAuthRecord): Promise<unknown>;
-}
+import { PouchDbDocument } from "./pouch-db.model";
 
-export interface LocalAuthRecord {
-    _id: string;
-    _rev?: string;
+export interface LocalAuthRecord extends PouchDbDocument {
     username: string;
     passwordHash: string;
     token: string;

@@ -2,10 +2,16 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Overview</h2>
 
-        <button [class]="isLoading ? 'btn btn-secondary' : 'btn btn-primary'" type="button" [disabled]="isLoading"
-            (click)="loadDashboard()">
-            Refresh
-        </button>
+        <div class="d-flex align-items-center">
+            <small *ngIf="dashboardData?.lastFetchedAt" class="text-muted mr-2">
+                Last fetched: {{ dashboardData?.lastFetchedAt | date:'medium' }}
+            </small>
+
+            <button [class]="isLoading ? 'btn btn-secondary' : 'btn btn-primary'" type="button" [disabled]="isLoading"
+                (click)="loadDashboard(true)">
+                Refresh
+            </button>
+        </div>
     </div>
 
     <app-dashboard-skeleton *ngIf="isLoading"></app-dashboard-skeleton>
@@ -15,6 +21,10 @@
     </div>
 
     <div *ngIf="!isLoading && !errorMessage && dashboardData">
+        <div *ngIf="dashboardData.isOfflineData" class="alert alert-warning">
+            Showing offline dashboard data. Some information may be outdated.
+        </div>
+
         <app-dashboard-charts [chartDonut]="dashboardData.chartDonut" [chartBar]="dashboardData.chartBar">
         </app-dashboard-charts>
 

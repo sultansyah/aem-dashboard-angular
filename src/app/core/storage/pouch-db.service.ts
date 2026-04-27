@@ -1,27 +1,31 @@
 import { Injectable } from '@angular/core';
-import { LocalAuthDatabase, LocalAuthRecord } from 'src/app/shared/models/local-auth.model';
+import { PouchDbDatabase, PouchDbDocument } from 'src/app/shared/models/pouch-db.model';
+
+type PouchDbConstructor = new (name: string) => PouchDbDatabase;
 
 @Injectable({
   providedIn: 'root'
 })
 export class PouchDbService {
-  private dbPromise: Promise<LocalAuthDatabase> | null = null;
+  private dbPromise: Promise<PouchDbDatabase> | null = null;
 
-  async upsert(record: LocalAuthRecord): Promise<unknown> {
+  async upsert<TDocument extends PouchDbDocument>(record: TDocument): Promise<unknown> {
     const db = await this.getDb();
     return db.put(record);
   }
 
-  async getById(id: string): Promise<LocalAuthRecord> {
+  async getById<TDocument extends PouchDbDocument>(id: string): Promise<TDocument> {
     const db = await this.getDb();
-    return db.get(id);
+    return db.get(id) as Promise<TDocument>;
   }
 
-  private getDb(): Promise<LocalAuthDatabase> {
+  private getDb(): Promise<PouchDbDatabase> {
     if (!this.dbPromise) {
       this.dbPromise = import('pouchdb-browser').then(module => {
-        const PouchDB = (module as any).default || module;
-        return new PouchDB('aem_local_auth') as LocalAuthDatabase;
+        const moduleWithDefault = module as { default?: PouchDbConstructor };
+        const PouchDB = moduleWithDefault.default ?? (module as PouchDbConstructor);
+
+        return new PouchDB('_aem_local');
       });
     }
 

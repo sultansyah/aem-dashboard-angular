@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     this.loadDashboard();
   }
 
-  loadDashboard(): void {
+  loadDashboard(showSuccessToast = false): void {
     this.isLoading = true;
     this.errorMessage = null;
 
@@ -36,11 +36,20 @@ export class DashboardComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.isLoading = false;
-          this.toastService.success('Dashboard data refreshed.');
         })
       )
       .subscribe({
-        next: value => this.dashboardData = value,
+        next: value => {
+          this.dashboardData = value;
+
+          if (showSuccessToast) {
+            const message = value.isOfflineData
+              ? 'Showing offline dashboard data.'
+              : 'Dashboard data refreshed.';
+
+            this.toastService.success(message);
+          }
+        },
         error: err => {
           if ((err as Error).message === 'Unauthorized') {
             this.authService.logout();
