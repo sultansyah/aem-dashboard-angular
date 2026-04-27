@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://test-demo.aemenersol.com/api',
-  enableLocalAuthFallback: false,
+  enableLocalAuthFallback: true,
   useHashRouting: false
 };
 
